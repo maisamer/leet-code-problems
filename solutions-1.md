@@ -1,4 +1,4 @@
-## LeetCode OJ - Phase 4 Interviews Questions - Easy Problems
+## LeetCode OJ - Phase 4 Interviews Questions
 
 ### 217. Contains Duplicate:
 Problem Link: https://leetcode.com/problems/contains-duplicate
@@ -18,6 +18,21 @@ public:
     }
 };
 ```
+
+### 268. Missing Number:
+Problem Link: https://leetcode.com/problems/missing-number/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int expectedSum = nums.size()*(nums.size()+1)/2;
+        return expectedSum - accumulate(nums.begin(),nums.end(),0);
+    }
+};
+```
+
 ### 238. Product of Array Except Self:
 Problem Link: https://leetcode.com/problems/product-of-array-except-self/
 
