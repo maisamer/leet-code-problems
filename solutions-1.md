@@ -94,6 +94,24 @@ public:
     }
 };
 ```
+### 121. Best Time to Buy and Sell Stock :
+Problem Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int profit = 0;
+        int mn = prices[0];
+        for(int i=1;i<prices.size();i++){
+            profit = max(profit,prices[i]-mn);
+            mn = min(mn,prices[i]);
+        }
+        return profit;
+    }
+};
+```
 ## Medium problems
 
 ### 238. Product of Array Except Self:
