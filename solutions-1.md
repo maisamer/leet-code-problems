@@ -112,6 +112,47 @@ public:
     }
 };
 ```
+### 53. Maximum Subarray :
+Problem Link: https://leetcode.com/problems/maximum-subarray/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+        int maxSum = nums[0],currSum = nums[0];
+        for(int i=1;i<nums.size();i++){
+            if(currSum < 0)
+                currSum = 0;
+            currSum += nums[i];
+            maxSum = max(maxSum,currSum);
+        }
+        return maxSum;
+    }
+};
+```
+### 303. Range Sum Query - Immutable
+Problem Link: https://leetcode.com/problems/range-sum-query-immutable/
+
+#### - CPP Solution
+```cpp
+class NumArray {
+public:
+    vector<int> sumArray;
+    NumArray(vector<int>& nums) {
+        sumArray.clear();
+        sumArray.push_back(nums[0]);
+        for(int i=1;i<nums.size();i++){
+            sumArray.push_back(sumArray[i-1]+nums[i]);
+        }
+    }
+    
+    int sumRange(int left, int right) {
+        if(left==0) return sumArray[right];
+        return sumArray[right]-sumArray[left-1];
+    }
+};
+```
 ## Medium problems
 
 ### 238. Product of Array Except Self:
