@@ -1,5 +1,7 @@
 ## LeetCode OJ - Phase 4 Interviews Questions
 
+## Easy problems
+
 ### 217. Contains Duplicate:
 Problem Link: https://leetcode.com/problems/contains-duplicate
 
@@ -71,6 +73,28 @@ public:
     }
 };
 ```
+### 70. Climbing Stairs :
+Problem Link: https://leetcode.com/problems/climbing-stairs/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n<3){
+            return n;
+        }
+        int oneStep = 1,twoStep=2;
+        for(int i=3;i<=n;i++){
+            int temp = twoStep;
+            twoStep = oneStep + twoStep;
+            oneStep = temp;
+        }
+        return twoStep;
+    }
+};
+```
+## Medium problems
 
 ### 238. Product of Array Except Self:
 Problem Link: https://leetcode.com/problems/product-of-array-except-self/
