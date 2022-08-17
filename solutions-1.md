@@ -211,6 +211,38 @@ class Solution {
     }
 }
 ```
+### 234. Palindrome Linked List
+Problem Link: https://leetcode.com/problems/palindrome-linked-list/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode* slow = head,*fast=head;
+        while(fast != nullptr && fast->next != nullptr){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        ListNode* prev = nullptr;
+        // reverse linked list
+        while(slow != nullptr){
+            ListNode* temp = slow->next;
+            slow->next = prev;
+            prev = slow; 
+            slow = temp;
+        }
+        ListNode* first = head,*last = prev;
+        while(last != nullptr){
+            if(first->val != last->val)
+                return false;
+            first = first->next;
+            last = last->next;
+        }
+        return true;
+    }
+};
+```
 ## Medium problems
 
 ### 238. Product of Array Except Self:
