@@ -188,6 +188,29 @@ public class Solution {
     }
 }
 ```
+### 876. Middle of the Linked List
+Problem Link: https://leetcode.com/problems/middle-of-the-linked-list/
+
+#### - java Solution
+```java
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode curr = head;
+        int length = 0;
+        while(curr != null){
+            curr = curr.next;
+            length++;
+        }
+        curr = head;
+        int mid = length/2;
+        while(mid>0){
+            mid--;
+            curr = curr.next;
+        }
+        return curr;
+    }
+}
+```
 ## Medium problems
 
 ### 238. Product of Array Except Self:
