@@ -153,6 +153,41 @@ public:
     }
 };
 ```
+### 141. Linked List Cycle
+Problem Link: https://leetcode.com/problems/linked-list-cycle/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode *curr = head;
+        while(curr!= nullptr){
+            if(curr->val == INT_MAX)
+                return true;
+            curr->val = INT_MAX;
+            curr = curr->next;
+        }
+        return false;   
+    }
+};
+```
+#### - java Solution using floyd detction cycle algorithm
+```java
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow)
+                return true;
+        }
+        return false;
+    }
+}
+```
 ## Medium problems
 
 ### 238. Product of Array Except Self:
