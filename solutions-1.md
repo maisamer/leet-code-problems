@@ -284,3 +284,22 @@ public:
     }
 };
 ```
+### 206. Reverse Linked List
+Problem Link: https://leetcode.com/problems/reverse-linked-list/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* curr = head,*prev=nullptr;
+        while(curr != nullptr){
+            ListNode* temp = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = temp;
+        } 
+        return prev;
+    }
+};
+```
