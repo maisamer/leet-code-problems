@@ -373,3 +373,24 @@ public:
     }
 };
 ```
+### 744. Find Smallest Letter Greater Than Target
+Problem Link: https://leetcode.com/problems/find-smallest-letter-greater-than-target/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+       int l=0,r=letters.size()-1,mid;
+       while(l<=r){
+          mid = (r+l)/2;
+          if(letters[mid]<=target)
+            l = mid +1;
+          else
+            r = mid - 1;    
+       }
+        l = l>=letters.size()?0:l;
+       return letters[l];
+    }
+};
+```
