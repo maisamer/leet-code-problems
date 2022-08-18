@@ -265,3 +265,22 @@ public:
     }
 };
 ```
+### 83. Remove Duplicates from Sorted List
+Problem Link: https://leetcode.com/problems/remove-duplicates-from-sorted-list/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* curr = head;
+        while(curr != nullptr && curr->next != nullptr){
+            if(curr->next->val == curr->val)
+                curr->next = curr->next->next;
+            else
+                curr = curr->next;
+        }
+        return head;
+    }
+};
+```
