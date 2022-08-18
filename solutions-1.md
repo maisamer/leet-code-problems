@@ -243,6 +243,28 @@ public:
     }
 };
 ```
+### 203. Remove Linked List Elements
+Problem Link: https://leetcode.com/problems/remove-linked-list-elements/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        while(head != nullptr && head->val == val)
+            head = head->next;
+        ListNode* curr = head;
+        while(curr != nullptr && curr->next != nullptr){
+            if(curr->next->val == val)
+                curr->next = curr->next->next;
+            else
+                curr = curr->next;
+
+        }
+        return head;
+    }
+};
+```
 ## Medium problems
 
 ### 238. Product of Array Except Self:
