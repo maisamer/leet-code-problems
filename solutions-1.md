@@ -303,3 +303,21 @@ public:
     }
 };
 ```
+#### - cpp recursive Solution
+```cpp
+class Solution {
+    ListNode* reverseList(ListNode* curr,ListNode* prev) {
+        if(curr == nullptr)
+            return prev;
+        ListNode* temp = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = temp;
+        return reverseList(curr,prev);
+    }
+public:
+    ListNode* reverseList(ListNode* head) {
+        return reverseList(head,nullptr);
+    }
+};
+```
