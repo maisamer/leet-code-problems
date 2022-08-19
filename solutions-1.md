@@ -558,3 +558,29 @@ public:
     }
 };
 ```
+### 572. Subtree of Another Tree
+Problem Link: https://leetcode.com/problems/subtree-of-another-tree/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        if(subRoot==nullptr)
+            return true;
+        if(root==nullptr)
+            return false;
+        if(sameTree(root,subRoot))
+            return true;
+        return isSubtree(root->left,subRoot)||isSubtree(root->right,subRoot); 
+    }
+    bool sameTree(TreeNode* p1, TreeNode* p2){
+        if(p1==nullptr &&p2==nullptr)
+            return true;
+        if(p1!=nullptr &&p2!=nullptr&&p1->val == p2->val)
+            return sameTree(p1->left,p2->left)&&sameTree(p1->right,p2->right);
+        else
+         return false;
+    }
+};
+```
