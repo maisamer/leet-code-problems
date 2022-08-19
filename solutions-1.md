@@ -584,3 +584,28 @@ public:
     }
 };
 ```
+### 1. Two Sum
+Problem Link: https://leetcode.com/problems/two-sum/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> out;
+        map<int,int>m;
+        for(int i=0;i<nums.size();i++)
+            m[nums[i]] = i + 1;
+        for(int j=0;j<nums.size();j++){
+            int i = m[target-nums[j]] - 1;
+            if(i!=-1 && i!=j){
+                out.push_back(i);
+                out.push_back(j);
+                break;
+            }   
+        }
+        return out;
+        
+    }
+};
+```
