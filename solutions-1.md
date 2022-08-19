@@ -421,3 +421,31 @@ public:
     }
 };
 ```
+### 111. Minimum Depth of Binary Tree
+Problem Link: https://leetcode.com/problems/minimum-depth-of-binary-tree/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        int depth = 0;
+        queue<TreeNode*>q;
+        if(root!=nullptr)
+            q.push(root);
+        while(!q.empty()){
+            double sz = q.size();
+            depth++;
+            while(sz--){
+                TreeNode* curr =q.front();
+                if(curr->left!= nullptr) q.push(curr->left);
+                if(curr->right!= nullptr) q.push(curr->right);
+                if(curr->left== nullptr &&curr->right== nullptr)
+                    return depth;
+                q.pop();
+            }
+        }
+        return depth;
+    }
+};
+```
