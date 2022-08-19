@@ -467,3 +467,23 @@ public:
     }
 };
 ```
+### 112. Path Sum
+Problem Link: https://leetcode.com/problems/path-sum/
+
+#### - cpp Solution
+```cpp
+class Solution {
+    bool hasPathSum(TreeNode* p, int sum,int targetSum) {
+        if(p==nullptr)
+            return false;
+        if(p!=nullptr && p->left == nullptr && p->right == nullptr)
+            return sum+p->val == targetSum;
+        return hasPathSum(p->left,sum+p->val,targetSum) || hasPathSum(p->right,sum+p->val,targetSum);
+    }
+public:
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        if(root == nullptr) return false;
+        return hasPathSum(root,0,targetSum);
+    }
+};
+```
