@@ -608,3 +608,55 @@ public:
     }
 };
 ```
+### 977. Squares of a Sorted Array
+Problem Link: https://leetcode.com/problems/squares-of-a-sorted-array/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        vector<int>v1,v2;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]<0)
+                v1.push_back(nums[i]*nums[i]);
+            else
+                v2.push_back(nums[i]*nums[i]);
+        }
+        int i1=v1.size()-1,i2=0;
+        for(int i=0;i<nums.size();i++){
+            if(v1.size()<1||i1<0)
+               nums[i] = v2[i2++];
+            else if(v2.size()<1||i2>=v2.size())
+                nums[i] = v1[i1--];
+            else if(v1[i1]<=v2[i2])
+                nums[i] = v1[i1--];
+            else
+               nums[i] = v2[i2++];
+        }
+        return nums;
+    }
+};
+```
+#### - another approach
+```cpp
+class Solution {
+public:
+    vector<int> sortedSquares(vector<int>& nums) {
+        int n =nums.size();
+        int l=0,r=n-1;
+        vector<int>ans(n,0);
+        int i=n-1;
+        while(l<=r){
+            if(nums[l]*nums[l]>=nums[r]*nums[r]){
+                ans[i--] = nums[l]*nums[l];
+                l++;
+            }else{
+                ans[i--] = nums[r]*nums[r];
+                r--;  
+            }
+        }
+        return ans;
+    }
+};
+```
