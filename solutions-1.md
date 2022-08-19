@@ -515,3 +515,25 @@ public:
     }
 };
 ```
+### 543. Diameter of Binary Tree
+Problem Link: https://leetcode.com/problems/diameter-of-binary-tree/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    int ans=0;
+    int maxHieght(TreeNode* node){
+        if(node == nullptr)
+            return 0;
+        int l = maxHieght(node->left);
+        int r = maxHieght(node->right);
+        ans=max(ans,l+r);
+        return max(l,r)+1;
+    }
+    int diameterOfBinaryTree(TreeNode* root) {
+        maxHieght(root);
+        return ans;
+    }
+};
+```
