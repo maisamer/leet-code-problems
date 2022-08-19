@@ -394,3 +394,30 @@ public:
     }
 };
 ```
+### 637. Average of Levels in Binary Tree
+Problem Link: https://leetcode.com/problems/average-of-levels-in-binary-tree/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    vector<double> averageOfLevels(TreeNode* root) {
+        vector<double> res;
+        queue<TreeNode*>q;
+        q.push(root);
+        while(!q.empty()){
+            double sz = q.size();
+            double sum = 0;
+            for(int i=0;i<sz;i++){
+                TreeNode* curr =q.front();
+                sum+=curr->val;
+                if(curr->left!= nullptr) q.push(curr->left);
+                if(curr->right!= nullptr) q.push(curr->right);
+                q.pop();
+            }
+            res.push_back(ceil(sum/sz * 100000.0) / 100000.0);
+        }
+        return res;
+    }
+};
+```
