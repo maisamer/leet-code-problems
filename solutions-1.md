@@ -487,3 +487,31 @@ public:
     }
 };
 ```
+### 104. Maximum Depth of Binary Tree
+Problem Link: https://leetcode.com/problems/maximum-depth-of-binary-tree/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        int mxDepth = 0;
+        queue<TreeNode*> q;
+        if(root != nullptr)
+            q.push(root);
+        while(!q.empty()){
+            int sz = q.size();
+            mxDepth++;
+            while(sz--){
+                TreeNode* curr = q.front();
+                if(curr->left!= nullptr)
+                    q.push(curr->left);
+                if(curr->right != nullptr)
+                    q.push(curr->right);
+                q.pop();
+            }
+        }
+        return mxDepth;
+    }
+};
+```
