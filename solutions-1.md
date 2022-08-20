@@ -660,3 +660,69 @@ public:
     }
 };
 ```
+### 844. Backspace String Compare
+Problem Link: https://leetcode.com/problems/backspace-string-compare/
+
+#### - cpp Solution using stack
+```cpp
+class Solution {
+public:
+string removeBack(string s){
+    stack<char>st;
+    for(int i=0;i<s.size();i++){
+        if(!st.empty()&&s[i]=='#'){
+            st.pop();
+        }else if(s[i]!='#'){
+            st.push(s[i]);
+        }
+    }
+    string res="";
+    while(!st.empty()){
+        res+=st.top();
+        st.pop();
+    }
+    return res;
+}
+bool backspaceCompare(string s, string t) {
+    return removeBack(s) == removeBack(t);
+}
+};
+```
+#### - another approach
+```cpp
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) {
+        int i = s.size()-0;
+        int j = t.size()-0;
+        int cont1 = 0,cont2=0;
+        while(i>=0 || j>=0){
+            while(i>=0 && (cont1>0 ||s[i]=='#')){
+                if(s[i]=='#')
+                    cont1++;
+                else
+                    cont1--;
+                i--;
+            }
+            while(j>=0 && (cont2>0 ||t[j]=='#')){
+                if(t[j]=='#')
+                    cont2++;
+                else
+                    cont2--;
+                j--;
+            }
+            if(i>=0 && j>=0){
+                if(s[i]!=t[j])
+                    return false;
+                i--;
+                j--;
+            }else if(i<0 && j<0)
+                return true;
+            else
+                return false;
+        }
+        return true;
+        
+    }
+};
+```
