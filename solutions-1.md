@@ -726,3 +726,26 @@ public:
     }
 };
 ```
+### 169. Majority Element
+Problem Link: https://leetcode.com/problems/majority-element/
+
+#### - cpp Solution 
+```cpp
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int item = 0 , counter = 0;
+        for(int i = 0;i<nums.size();i++){
+            if(counter == 0 ){
+                counter ++;
+                item = nums[i];
+            }else if(item == nums[i]){
+                counter ++ ;
+            }else{
+                counter --;
+            }
+        }
+        return item;
+    }
+};
+```
