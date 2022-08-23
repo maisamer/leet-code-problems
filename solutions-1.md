@@ -807,3 +807,24 @@ public:
     }
 };
 ```
+### meeting rooms
+Problem Link: https://leetcode.com/problems/meeting-rooms
+
+#### - cpp Solution 
+```cpp
+class Solution {
+public:
+    bool canAttendMeetings(vector<Interval> &intervals) {
+        sort(intervals.begin(), intervals.end(),  [](const Interval& lhs, const Interval& rhs) {
+            return lhs.start < rhs.start;
+        });
+        int nw = 0;
+        for(int i=0;i<intervals.size();i++){
+            if(intervals[i].start<nw)
+                return false;
+            nw = intervals[i].start;
+        }
+        return true;
+    }
+};
+```
