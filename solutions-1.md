@@ -749,6 +749,25 @@ public:
     }
 };
 ```
+### 235. Lowest Common Ancestor of a Binary Search Tree
+Problem Link: https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/
+
+#### - cpp Solution 
+```cpp
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        while (root != nullptr){
+            if(p->val>root->val && q->val>root->val)
+                root = root->right;
+            else if(p->val<root->val && q->val<root->val)
+                root = root->left; 
+            else break;
+        }
+        return root;
+    }
+};
+```
 ### 2022. Convert 1D Array Into 2D Array
 Problem Link: https://leetcode.com/problems/convert-1d-array-into-2d-array/
 
