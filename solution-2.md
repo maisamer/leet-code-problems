@@ -32,15 +32,21 @@ Problem Link: https://leetcode.com/problems/find-the-duplicate-number/
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
+        int p1=0,p2=0;
         for(int i=0;i<nums.size();i++){
-            int ind = abs(nums[i])-1;
-            if(nums[ind]>0)
-                nums[ind]*=-1;
-            else
-                return ind+1;
-            
+            p1 = nums[p1];
+            p2 = nums[nums[p2]];
+            if(p1==p2)
+             break;
         }
-         return -1;
+        p2 = 0;
+        for(int i=0;i<nums.size();i++){
+            p1 = nums[p1];
+            p2 = nums[p2];
+            if(p1==p2)
+             break;
+        }
+        return p1;
     }
 };
 ```
