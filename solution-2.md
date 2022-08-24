@@ -160,3 +160,31 @@ public:
     }
 };
 ```
+### 784. Letter Case Permutation
+Problem Link: https://leetcode.com/problems/letter-case-permutation/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    void backtracking(string s,int it,vector<string>&ans,string curr){
+        if(curr.size()==s.size()){
+            ans.push_back(curr);
+            return;
+        }
+        if(s[it]>='0' && s[it]<='9')
+            backtracking(s,it+1,ans,curr+s[it]);
+        else{
+            backtracking(s,it+1,ans,curr+(char)toupper(s[it]));
+            backtracking(s,it+1,ans,curr+(char)tolower(s[it]));
+        }
+        
+    }
+
+    vector<string> letterCasePermutation(string s) {
+        vector<string> ans;
+        backtracking(s,0,ans,"");
+        return ans;
+    }
+};
+```
