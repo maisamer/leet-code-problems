@@ -129,3 +129,34 @@ public:
     }
 };
 ```
+### 128. Longest Consecutive Sequence
+Problem Link: https://leetcode.com/problems/longest-consecutive-sequence/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if(nums.size()<=1)
+            return nums.size();
+        set<int> s;
+        int mx = 0;
+        for(int i=0;i<nums.size();i++)
+           s.insert(nums[i]);
+        int counter = 1;
+        set<int>::iterator bf = s.begin();
+        set<int>::iterator itr = s.begin();
+        itr ++ ;
+        for (;itr != s.end(); itr++){
+            if(*itr - *bf == 1){
+                counter++;
+            }else{
+                counter = 1;
+            }
+            bf ++;
+            mx = max(counter,mx);
+        }
+        return mx == 0 ? 1 : mx ;
+    }
+};
+```
