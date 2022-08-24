@@ -188,3 +188,26 @@ public:
     }
 };
 ```
+### 78. Subsets
+Problem Link: https://leetcode.com/problems/subsets/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void backtrack(vector<int>nums,int i,vector<int>v){
+        if(i==nums.size()){
+            ans.push_back(v);
+            return;
+        }
+        backtrack(nums,i+1,v);
+        v.push_back(nums[i]);
+        backtrack(nums,i+1,v);
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        backtrack(nums,0,{});
+        return ans;
+    }
+};
+```
