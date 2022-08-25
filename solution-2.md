@@ -211,3 +211,30 @@ public:
     }
 };
 ```
+### 90. Subsets II
+Problem Link: https://leetcode.com/problems/subsets-ii/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void backtracking(vector<int>nums,int i,vector<int> v){
+        if(i==nums.size()){
+            ans.push_back(v);
+            return;
+        }
+        int j = i;
+        while(j+1<nums.size()&&nums[j]==nums[j+1])
+            j++;
+        backtracking(nums,j+1,v);
+        v.push_back(nums[i]);
+        backtracking(nums,i+1,v);
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        backtracking(nums,0,{});
+        return ans;
+    }
+};
+```
