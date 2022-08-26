@@ -264,3 +264,36 @@ public:
     }
 };
 ```
+### 47. Permutations II
+Problem Link: https://leetcode.com/problems/permutations-ii/submissions/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void permute(map<int,int>&m,int len,vector<int> v){
+        if(len==v.size()){
+            ans.push_back(v);
+            return;
+        }
+        for (auto[key, val] : m)
+        {
+            if(val>0){
+               m[key]--;
+               v.push_back(key);
+               permute(m,len,v);
+               m[key]++;
+               v.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        map<int,int>m;
+        for(int i:nums)
+            m[i]++;
+        permute(m,nums.size(),{});
+        return ans;
+    }
+};
+```
