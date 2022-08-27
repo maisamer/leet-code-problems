@@ -323,4 +323,34 @@ public:
     }
 };
 ```
+### 39. Combination Sum
+Problem Link: https://leetcode.com/problems/combination-sum/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    vector<vector<int>> ans;
+public:
+    void combination(vector<int> candidates, int target,int sum,vector<int> v,int start){
+        if(sum == target){
+            ans.push_back(v);
+            return;
+        }
+        if(sum > target)
+            return;
+        for(int i=start;i<candidates.size();i++){
+            v.push_back(candidates[i]);
+            sum+=candidates[i];
+            combination(candidates,target,sum,v,i);
+            sum-=candidates[i];
+            v.pop_back();
+        }
+        
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        combination(candidates,target,0,{},0);
+        return ans;
+    }
+};
+```
 
