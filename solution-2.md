@@ -297,3 +297,30 @@ public:
     }
 };
 ```
+### 77. Combinations
+Problem Link: https://leetcode.com/problems/combinations/submissions/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    vector<vector<int>> ans;
+    void combination(int n,int k,int start,vector<int> v){
+        if(k == v.size()){
+            ans.push_back(v);
+            return;
+        }
+        for(int i = start;i<=n;i++){
+            v.push_back(i);
+            combination(n,k,i+1,v);
+            v.pop_back();
+        }
+        
+    }
+    vector<vector<int>> combine(int n, int k) {
+        combination(n,k,1,{});
+        return ans;
+    }
+};
+```
+
