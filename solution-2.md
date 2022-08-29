@@ -353,4 +353,33 @@ public:
     }
 };
 ```
+### 40. Combination Sum II
+Problem Link: https://leetcode.com/problems/combination-sum-ii/
 
+#### - CPP Solution
+```cpp
+class Solution {
+    vector<vector<int>> ans;
+    void backtracking(vector<int> candidates, int target,vector<int> v,int sum,int i){
+        if(sum == target){
+            ans.push_back(v);
+            return;
+        }
+        if(i == candidates.size() || sum > target)
+            return;
+
+        v.push_back(candidates[i]);
+        backtracking(candidates,target,v,sum+candidates[i],i+1);
+        v.pop_back(); 
+        while(i+1<candidates.size() && candidates[i]==candidates[i+1]) i++;
+        backtracking(candidates,target,v,sum,i+1);
+    }
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        backtracking(candidates,target,{},0,0);
+        return ans;
+    }
+};
+
+```
