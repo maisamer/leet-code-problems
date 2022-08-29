@@ -409,3 +409,27 @@ public:
     }
 };
 ```
+### 22. Generate Parentheses
+Problem Link: https://leetcode.com/problems/generate-parentheses/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    vector<string> ans;
+    void backtrack(int o,int c,int n,string curr){
+        if(curr.size()==n*2){
+            ans.push_back(curr);
+            return;
+        }
+        if(o < n)
+            backtrack(o+1,c,n,curr+"(");
+        if(c < n && c < o)
+            backtrack(o,c+1,n,curr+")");
+    }
+public:
+    vector<string> generateParenthesis(int n) {
+        backtrack(0,0,n,"");
+        return ans;
+    }
+};
+```
