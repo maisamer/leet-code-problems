@@ -383,3 +383,29 @@ public:
 };
 
 ```
+### 216. Combination Sum III
+Problem Link: https://leetcode.com/problems/combination-sum-iii/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    vector<vector<int>> ans;
+    void backtracking(vector<int> sub,int k,int n,int sum,int i){
+        if(sum == n && sub.size() == k){
+            ans.push_back(sub);
+            return;
+        }
+        if(sum > n || i > 9)
+            return;
+        sub.push_back(i);
+        backtracking(sub,k,n,sum +i,i+1);
+        sub.pop_back();
+        backtracking(sub,k,n,sum,i+1);
+    }
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+       backtracking({},k,n,0,1);
+       return ans;
+    }
+};
+```
