@@ -433,3 +433,30 @@ public:
     }
 };
 ```
+### 494. Target Sum
+Problem Link: https://leetcode.com/problems/target-sum/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int counter = 0;
+    void backtrack(vector<int> nums,int target,int sum,int i){
+        if(nums.size() == i){
+            if(sum ==target)
+                counter ++;
+            return;
+        }
+        backtrack(nums,target,sum+nums[i],i+1);
+        backtrack(nums,target,sum-nums[i],i+1);   
+    }
+    int findTargetSumWays(vector<int>& nums, int target) {
+       int mem[21][4001];
+       for(int i=0;i<21;i++)
+           for(int j=0;j<4001;j++)
+               mem[i][j] = MIN_INT;
+       backtrack(nums,target,0,0); 
+       return counter;
+    }
+};
+```
