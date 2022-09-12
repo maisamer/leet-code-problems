@@ -486,3 +486,47 @@ public:
     }
 };
 ```
+### 131. Palindrome Partitioning
+Problem Link: https://leetcode.com/problems/palindrome-partitioning/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    vector<vector<string>> ans;
+    bool isPalindrome(string S)
+    {
+        for (int i = 0; i < S.length() / 2; i++) {
+            if (S[i] != S[S.length() - i - 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+    string substr(string s,int l,int r){
+        string str="";
+        for(int i=l;i<r;i++){
+            str+=s[i];
+        }
+        return str;
+    }
+    void backtrack(string s,int start,vector<string> subAns){
+        if(start >= s.size()){
+            ans.push_back(subAns);
+            return;
+        }
+        for(int i=start;i<s.size();i++){
+            string curr = substr(s,start, i+1);
+            if(isPalindrome(curr)){
+                subAns.push_back(curr);
+                backtrack(s,i+1,subAns);
+                subAns.pop_back();
+            }
+        }
+    }
+public:
+    vector<vector<string>> partition(string s) {
+        backtrack(s,0,{});
+        return ans;
+    }
+};
+```
