@@ -530,3 +530,25 @@ public:
     }
 };
 ```
+### 48. Rotate Image
+Problem Link: https://leetcode.com/problems/rotate-image/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int L=0,R=matrix.size()-1;
+        while(L<R){
+            for(int i=L,j=R;i<R;i++,j--){
+                int temp=matrix[j][L];
+                matrix[j][L]=matrix[R][j];
+                matrix[R][j]=matrix[i][R];
+                matrix[i][R]=matrix[L][i];
+                matrix[L][i]=temp;
+            }
+            L++,R--;
+        }
+    }
+};
+```
