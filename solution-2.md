@@ -552,3 +552,51 @@ public:
     }
 };
 ```
+### 79. Word Search
+Problem Link: https://leetcode.com/problems/word-search/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    int dx[4]={1,-1,0,0};
+    int dy[4]={0,0,1,-1};
+    int m,n;
+    bool ans = false;
+    bool vis[7][7];
+public:
+    void backtrack(int curr,int x,int y,vector<vector<char>>& board, string word){
+        if(curr == word.size()){
+            ans = true;
+            return ;
+        }
+        if(x >= m || y >= n || x<0 || y<0 || word[curr]!=board[x][y] || vis[x][y])
+            return;
+        vis[x][y] = true;
+        for(int i=0;i<4;i++){
+            int newX=x+dx[i];
+            int newY=y+dy[i];
+            backtrack(curr+1,newX,newY,board,word);
+            
+        }
+        vis[x][y] = false;
+    }
+    void initVis(){
+        for(int i=0;i<6;i++)
+           for(int j=0;j<6;j++)
+               vis[i][j] = false;
+    }
+    bool exist(vector<vector<char>>& board, string word) {
+       m = board.size();
+       n = board[0].size();
+       initVis();
+       for(int i=0;i<m;i++){
+           for(int j=0;j<n;j++){
+               backtrack(0,i,j,board,word);
+               if(ans)
+                   return ans;
+           }
+       }
+       return ans;
+    }
+};
+```
