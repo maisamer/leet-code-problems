@@ -600,3 +600,41 @@ public:
     }
 };
 ```
+### 17. Letter Combinations of a Phone Number
+Problem Link: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    map<int,string>dic;
+    vector<string>ans;
+    void backtrack(string digits,int it,string curr){
+        if(it==digits.size()){
+            ans.push_back(curr);
+            return;
+        }
+        string com = dic[digits[it]-'0'];
+        for(int i=0;i<com.size();i++){
+           backtrack(digits,it+1,curr+com[i]); 
+        }
+    }
+public:
+    vector<string> letterCombinations(string digits) {
+        if(digits.size()>0){
+            int asci = 97;
+            for(int i=2;i<10;i++){
+                string s="";
+                int len = i == 7 || i==9 ? 4 : 3;
+                for(int j=0;j<len;j++){
+                    char c = asci;
+                    s+=c;
+                    asci++;
+                }
+                dic[i]=s;
+            }
+            backtrack(digits,0,"");
+        }
+        return ans;
+    }
+};
+```
