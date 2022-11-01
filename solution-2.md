@@ -678,3 +678,32 @@ public:
     }
 };
 ```
+### 62. Unique Paths
+Problem Link: https://leetcode.com/problems/unique-paths/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    int mem[105][105];
+    bool outOfBound(int m,int n,int x,int y){
+        return x>m||y>n;
+    }
+    int uniquePaths(int m,int n,int x,int y){
+        if(x==m&&y==n)
+            return 1;
+        if(outOfBound(m,n,x,y))
+            return 0;
+        if(mem[x][y])
+            return mem[x][y];
+        mem[x][y] = uniquePaths(m,n,x+1,y)+uniquePaths(m,n,x,y+1);
+        return mem[x][y];
+    }
+    int uniquePaths(int m, int n) {
+        for(int i=1;i<105;i++)
+            for(int j=1;j<105;j++)
+                mem[i][j] = 0;
+        return uniquePaths(m,n,1,1);
+    }
+};
+```
