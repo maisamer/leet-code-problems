@@ -727,3 +727,26 @@ public:
     }
 };
 ```
+### 139. Word Break
+Problem Link: https://leetcode.com/problems/word-break
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        vector<int>dp(301,-1);
+        dp[s.size()]=1;
+        int n = s.size();
+        for(int i=n-1;i>=0;i--)
+            for(int j=0;j<wordDict.size();j++)
+                if(i+wordDict[j].size()<=n){
+                    string curr = s.substr(i,wordDict[j].size());
+                    if(curr == wordDict[j]&&dp[i+wordDict[j].size()]>0){
+                        dp[i]=1;
+                    }
+                }
+        return dp[0]==1;
+    }
+};
+```
