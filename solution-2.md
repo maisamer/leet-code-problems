@@ -707,3 +707,23 @@ public:
     }
 };
 ```
+### 152. Maximum Product Subarray
+Problem Link: https://leetcode.com/problems/maximum-product-subarray/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int res = *max_element(nums.begin(), nums.end());
+        int mn=1,mx=1;
+        for(int i=0;i<nums.size();i++){
+            int temp = mn;
+            mn = min(mn*nums[i],min(mx*nums[i],nums[i]));
+            mx = max(temp*nums[i],max(mx*nums[i],nums[i]));
+            res = max(res,mx);
+        }
+        return res;
+    }
+};
+```
