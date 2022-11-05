@@ -770,3 +770,30 @@ public:
     }
 };
 ```
+### 91. Decode Ways
+Problem Link: https://leetcode.com/problems/decode-ways/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    int numDecodings(string s) {
+        int choice1=1,choice2=1,res=0;
+        for(int i=s.size()-1;i>=0;i--){
+            res=1;
+            if(s[i]=='0') res=0;
+            else res += choice1;
+            if(i+1<s.size()&&
+            (s[i+1]-'0'==1||(s[i+1]-'0'==2&&s[i]-'0'<7))){
+                res+=choice2;
+            }
+            int temp = choice1;
+            choice1 = res;
+            choice2 = temp;
+
+        }
+        return res;
+    
+    }
+};
+```
