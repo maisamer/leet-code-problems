@@ -818,3 +818,33 @@ public:
     }
 };
 ```
+### 5. Longest Palindromic Substring
+Problem Link: https://leetcode.com/problems/longest-palindromic-substring/
+
+#### - cpp Solution
+```cpp
+class Solution {
+     string longestPalindrome(string s,int sz) {
+         string res = "";
+         int res_len = 0;
+        for(int i=0;i<s.size();i++){
+            int l=i,r=i+sz;
+            while (l >= 0 and r < size(s) and s[l] == s[r]) {
+                if (res_len < r-l+1) {
+                    res = s.substr(l, r-l+1);
+                    res_len = r-l+1;
+                }
+                l --;
+                r ++;
+            }    
+        }
+        return res;
+     }
+public:
+    string longestPalindrome(string s) {
+        string res1 = longestPalindrome(s,0);
+        string res2 = longestPalindrome(s,1);
+        return (size(res1) > size(res2))? res1 : res2;
+    }
+};
+```
