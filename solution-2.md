@@ -848,3 +848,22 @@ public:
     }
 };
 ```
+### 55. Jump Game
+Problem Link: https://leetcode.com/problems/jump-game/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int steps = 0;
+        for(int i=0;i<nums.size()-1;i++){
+            if(steps==0&&nums[i]==0)
+                return false;
+            steps = max(steps,nums[i]);
+            steps --;
+        }
+        return true;
+    }
+};
+```
