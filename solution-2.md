@@ -910,3 +910,31 @@ public:
     }
 };
 ```
+### 416. Partition Equal Subset Sum
+Problem Link: https://leetcode.com/problems/partition-equal-subset-sum/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if(sum % 2 != 0)
+            return false;
+        set<int>dp;
+        dp.insert(0);
+        sum/=2;
+        for(int j=0;j<nums.size();j++){
+            set<int>temp;
+            for(int item:dp){
+                if(item+nums[j] == sum)
+                    return true;
+                temp.insert(item+nums[j]);
+                temp.insert(item);
+            }
+            dp = temp;
+        }
+        return false;
+    }
+};
+```
