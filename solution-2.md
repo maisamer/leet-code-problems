@@ -867,3 +867,27 @@ public:
     }
 };
 ```
+### 647. Palindromic Substrings
+Problem Link: https://leetcode.com/problems/palindromic-substrings/
+
+#### - cpp Solution
+```cpp
+class Solution {
+public:
+    int countSubstrings(string s,int size_type) {
+        int cnt = 0;
+        for(int i=0;i<s.size();i++){
+            int l=i,r=i+size_type;
+            while(l>=0 && r<s.size() && s[l]==s[r]){
+                l--;
+                r++;
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+    int countSubstrings(string s) {
+        return countSubstrings(s,0)+countSubstrings(s,1);
+    }
+};
+```
