@@ -938,3 +938,41 @@ public:
     }
 };
 ```
+### 698. Partition to K Equal Sum Subsets
+Problem Link: https://leetcode.com/problems/partition-to-k-equal-sum-subsets/
+
+#### - cpp Solution
+```cpp
+class Solution {
+    int sum = 0;
+public:
+    bool canPartitionKSubsets(vector<int>& a, int k) {
+        sort(a.begin(), a.end(), greater <>());
+        sum = accumulate(a.begin(), a.end(), 0);
+        if(sum%k)
+            return false;
+        sum/=k;
+        vector<bool>used(18);
+        return backtrack(a,used,k,sum,0);
+    }
+    bool backtrack(vector<int>& a,vector<bool>& used, int k,int target,int i){
+        if(i<a.size()&&a[i]>sum)
+            return false;
+        if(k==1)
+            return true;
+        if(target==0)
+            return backtrack(a,used,k-1,sum,0);
+        if(target < 0)
+            return false;
+        for(int j = i;j<a.size();j++){
+            if(used[j] or target-a[j] < 0)
+                continue;
+            used[j]=true;
+            if(backtrack(a,used,k,target-a[j],j+1))
+                return true;
+            used[j]=false;
+        }
+        return false;
+    }
+};
+```
