@@ -976,3 +976,29 @@ public:
     }
 };
 ```
+### 309. Best Time to Buy and Sell Stock with Cooldown
+Problem Link: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/
+
+#### - cpp Solution
+```cpp
+class Solution {
+    int memo[5003][2];
+public:
+    int maxProfit(vector<int>& prices) {
+        memset(memo, -1, sizeof memo);
+        return backtrack(prices,1,0);
+    }
+    int backtrack(vector<int>& prices,int buy,int i){
+        if(i>=prices.size())
+            return 0;
+        if(memo[i][buy]!=-1)
+            return memo[i][buy];
+        int cooldown = backtrack(prices,buy,i+1); 
+        if(buy)
+            memo[i][buy] = max(backtrack(prices,0,i+1) - prices[i],cooldown);//buy
+        else
+            memo[i][buy] = max(backtrack(prices,1,i+2) + prices[i],cooldown);//sell
+        return memo[i][buy];        
+    }
+};
+```
