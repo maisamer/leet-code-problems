@@ -108,3 +108,62 @@ public:
     }
 };
 ```
+### 148. Sort List
+Problem Link: https://leetcode.com/problems/sort-list/
+
+#### - CPP Solution
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* getMidle(ListNode* node){
+        cout<<node->val<<endl;
+       ListNode* slow = node , *fast = node->next; 
+       while(fast != nullptr and fast->next != nullptr){
+           slow = slow->next;
+           fast = fast->next->next;
+       }
+       return slow;
+    }
+    ListNode* merge(ListNode* l1,ListNode* l2){
+        ListNode* dummy = new ListNode();
+        ListNode* root = dummy;
+        while (l1 != nullptr and l2 != nullptr){
+            if(l1->val < l2->val){
+                root->next = l1;
+                l1 = l1->next;
+            }else{
+                root->next = l2;
+                l2 = l2->next;
+            }
+            root = root->next;
+        }
+        if(l1 != nullptr)
+            root->next = l1;
+        if(l2 != nullptr)
+            root->next = l2;
+        return dummy->next;
+    }
+    ListNode* sortList(ListNode* head) {
+        if(head == nullptr or head->next == nullptr)
+            return head;
+        ListNode* left = head;
+        ListNode* right = getMidle(head);
+        ListNode* temp = right->next;
+        right->next = nullptr;
+        right = temp;
+        left = sortList(left);
+        right = sortList(right);
+        return merge(left,right);  
+    }
+};
+```
