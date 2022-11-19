@@ -88,7 +88,7 @@ public:
     }
 };
 ```
-#### - optimize solution with two pointer ticnique CPP Solution
+#### - optimize solution with two pointer technique CPP Solution
 ```cpp
 class Solution {
 public:
