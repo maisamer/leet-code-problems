@@ -113,16 +113,6 @@ Problem Link: https://leetcode.com/problems/sort-list/
 
 #### - CPP Solution
 ```cpp
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     ListNode* getMidle(ListNode* node){
@@ -164,6 +154,40 @@ public:
         left = sortList(left);
         right = sortList(right);
         return merge(left,right);  
+    }
+};
+```
+### 143. Reorder List
+Problem Link: https://leetcode.com/problems/reorder-list/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        // get midle 
+        ListNode* slow = head, *fast = head->next;
+        while(fast != nullptr and fast->next != nullptr){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        ListNode* second = slow->next;   
+        ListNode* prev = slow->next = nullptr;
+        // reverse linked list
+        while(second != nullptr){
+            ListNode* temp = second->next;
+            second->next = prev;
+            prev = second; 
+            second = temp;
+        }
+        ListNode* first = head,*last = prev;
+        while(last != nullptr){
+            ListNode* temp1 = first->next,*temp2 = last->next;
+            first->next = last;
+            last->next = temp1;
+            first = temp1;
+            last = temp2;
+        }
     }
 };
 ```
