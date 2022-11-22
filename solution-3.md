@@ -216,6 +216,53 @@ public:
     }
 };
 ```
+### 417. Pacific Atlantic Water Flow
+Problem Link: https://leetcode.com/problems/pacific-atlantic-water-flow/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int rows,cols;
+    int dx[4] = {0,0,-1,1};
+    int dy[4] = {1,-1,0,0};
+
+    bool isOutBound(int r,int c){
+        return r<0 or r>=rows or c<0 or c>=cols ;
+    }
+    void dfs(vector<vector<int>>& heights,int i,int j,map<pair<int,int>,bool>& vis,int prevHieght){
+        if(isOutBound(i,j) or vis[{i,j}] or heights[i][j]<prevHieght) return;
+        vis[{i,j}] = true;
+        for(int it=0;it<4;it++)
+            dfs(heights,i+dx[it],j+dy[it],vis,heights[i][j]);
+    }
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+        vector<vector<int>> res;
+        rows = heights.size();
+        cols = heights[0].size();
+        map<pair<int,int>,bool> pac,atl;
+        for(int c=0;c<cols;c++){
+            dfs(heights,0,c,pac,heights[0][c]);
+            dfs(heights,rows-1,c,atl,heights[rows-1][c]);
+        }
+        for(int r=0;r<rows;r++){
+            dfs(heights,r,0,pac,heights[r][0]);
+            dfs(heights,r,cols-1,atl,heights[r][cols-1]);
+        }
+        for(int i=0;i<rows;i++)
+            for(int j=0;j<cols;j++)
+                if(pac[{i,j}] and atl[{i,j}])
+                    res.push_back({i,j});
+        return res;
+    }
+};
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+```
 ### 
 Problem Link: 
 
