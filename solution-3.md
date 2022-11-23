@@ -257,11 +257,39 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 200. Number of Islands
+Problem Link: https://leetcode.com/problems/number-of-islands/
 
 #### - CPP Solution
 ```cpp
+class Solution {
+    bool vis[301][301];
+    int dx[4] = {0,0,-1,1};
+    int dy[4] = {1,-1,0,0};
+    int rows,cols;
+
+    bool isOutBound(int r,int c){
+        return r<0 or r>=rows or c<0 or c>=cols ;
+    }
+    void dfs(vector<vector<char>>& grid,int r,int c){
+        if(isOutBound(r,c) or vis[r][c] or grid[r][c]=='0') return;
+        vis[r][c] = true;
+        for(int it=0;it<4;it++)
+            dfs(grid,r+dx[it],c+dy[it]);
+    }
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        int ans = 0;
+        rows = grid.size(),cols = grid[0].size();
+        for(int r=0;r<rows;r++)
+            for(int c=0;c<cols;c++)
+                if(!vis[r][c] && grid[r][c] == '1'){
+                    dfs(grid,r,c);
+                    ans++;
+                }
+        return ans;
+    }
+};
 ```
 ### 
 Problem Link: 
