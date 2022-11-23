@@ -291,9 +291,39 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 92. Reverse Linked List II
+Problem Link: https://leetcode.com/problems/reverse-linked-list-ii/
 
 #### - CPP Solution
 ```cpp
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        if(left == right)
+            return head;
+        int cnt = 1;
+        ListNode* leftNode ,*rightNode = head,*node;
+        while(cnt < right){
+            if(cnt == left -1)
+                node = rightNode;
+            if(cnt == left)
+                leftNode = rightNode;
+            rightNode = rightNode->next;
+            cnt++;      
+        }
+        ListNode* prev = rightNode->next;
+        int steps = right - left + 1;
+        while(steps --){
+            ListNode* temp = leftNode->next;
+            leftNode->next = prev;
+            prev = leftNode;
+            leftNode = temp;
+        }
+        if(node != nullptr)
+            node->next = rightNode;
+        if(left == 1) 
+            head = rightNode;
+        return head;
+    }
+};
 ```
