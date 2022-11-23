@@ -327,3 +327,38 @@ public:
     }
 };
 ```
+### 61. Rotate List
+Problem Link: https://leetcode.com/problems/rotate-list/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head == nullptr || head->next == nullptr) return head;
+        int length = 1;
+        ListNode* right = head;
+        while(right->next != nullptr){
+            right = right->next;
+            length ++;
+        }
+        k = k % length;
+        if(!k)   return head;
+        ListNode* left = head;
+        int steps = length - k;
+        ListNode * tail;
+        while(steps){
+            if(steps == 1)
+                tail = left;
+            left = left->next;
+            steps--;
+        }
+        if(tail != nullptr)
+            tail->next = nullptr;
+        ListNode* ans = left;
+        right->next = head;
+        return ans;
+
+    }
+};
+```
