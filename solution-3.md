@@ -362,3 +362,47 @@ public:
     }
 };
 ```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 24. Swap Nodes in Pairs
+Problem Link: https://leetcode.com/problems/swap-nodes-in-pairs/
+
+#### - CPP Solution
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* swapPairs(ListNode* head) {
+        if(head == nullptr || head->next == nullptr) return head;
+        ListNode*dummy = new ListNode(0);
+        ListNode*curr = head;
+        ListNode* ans = dummy;
+        while(curr != nullptr){
+            if(curr->next != nullptr){
+                ans->next = new ListNode(curr->next->val);
+                ans = ans->next;
+            }
+            ans->next = new ListNode(curr->val);
+            ans = ans->next;
+            curr = curr->next;
+            if(curr != nullptr)
+                curr = curr->next;
+        }
+        return dummy->next;
+    }
+};
+```
