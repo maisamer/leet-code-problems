@@ -362,28 +362,33 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 328. Odd Even Linked List
+Problem Link: https://leetcode.com/problems/odd-even-linked-list/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    ListNode* oddEvenList(ListNode* head) {
+        if(head == nullptr || head-> next == nullptr || head->next->next == nullptr) return head;
+        ListNode* odd = head;
+        ListNode*even = head->next,*even_head=head->next;
+        while(even != nullptr and even->next != nullptr){
+            odd->next = odd->next->next;
+            even->next = even->next->next;
+            even = even->next;
+            odd = odd->next;
+        }
+        odd->next = even_head;
+        return head;
+    }
+};
 ```
 ### 24. Swap Nodes in Pairs
 Problem Link: https://leetcode.com/problems/swap-nodes-in-pairs/
 
 #### - CPP Solution
 ```cpp
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
 public:
     ListNode* swapPairs(ListNode* head) {
