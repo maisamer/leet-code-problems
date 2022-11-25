@@ -578,3 +578,32 @@ public:
     }
 };
 ```
+### 435. Non-overlapping Intervals
+Problem Link: https://leetcode.com/problems/non-overlapping-intervals/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        int ans = 0;
+        sort(intervals.begin(),intervals.end());
+        int prev = -5e5;
+        for(int i=0;i<intervals.size();i++){
+            if(intervals[i][0]<prev){
+                ans++;
+                if(intervals[i][1]<prev)
+                    prev = intervals[i][1]; 
+            }else
+             prev = intervals[i][1];
+        }
+        return ans;
+    }
+};
+```
+### 
+Problem Link:
+
+#### - CPP Solution
+```cpp
+```
