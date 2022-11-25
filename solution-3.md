@@ -490,3 +490,44 @@ public:
     }
 };
  ```
+### 373. Find K Pairs with Smallest Sums
+Problem Link: https://leetcode.com/problems/find-k-pairs-with-smallest-sums/
+
+#### - CPP Solution
+```cpp
+typedef pair<int, int> pd;
+
+class Solution {
+    struct myComp {
+        constexpr bool operator()(
+            pair<int, int> const& a,
+            pair<int, int> const& b)
+            const noexcept
+        {
+            return a.first + a.second < b.first + b.second;
+        }
+    };
+public:
+    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        vector<vector<int>> result;
+        priority_queue<pd, vector<pd>, myComp> maxHeap;
+        for(int i=0;i<nums1.size();i++){
+            for(int j=0;j<nums2.size();j++){
+                if(maxHeap.size() < k)
+                    maxHeap.push({nums1[i],nums2[j]});
+                else if(maxHeap.size() == k && nums1[i] + nums2[j] < maxHeap.top().first + maxHeap.top().second){
+                    maxHeap.pop();
+                    maxHeap.push({nums1[i],nums2[j]});
+                }else if(maxHeap.size() == k && nums1[i] + nums2[j] > maxHeap.top().first + maxHeap.top().second){
+                    break;
+                }
+            }
+        }
+        while(!maxHeap.empty()){
+            result.push_back({maxHeap.top().first ,maxHeap.top().second});
+            maxHeap.pop();
+        }
+        return result;
+    }
+};
+```
