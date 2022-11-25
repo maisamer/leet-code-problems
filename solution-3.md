@@ -601,9 +601,35 @@ public:
     }
 };
 ```
-### 
-Problem Link:
+### 621. Task Scheduler
+Problem Link: https://leetcode.com/problems/task-scheduler/
 
 #### - CPP Solution
 ```cpp
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        map<char,int> m;
+        int ans = tasks.size();
+        int mx = 0; 
+        for(int i=0;i<tasks.size();i++){
+            m[tasks[i]]++;
+            mx = max(mx,m[tasks[i]]);
+        }
+        ans+=(mx-1)*n;
+        bool flag = true;
+        for (auto const& [key, val] : m){
+            if(ans <= tasks.size()) break;
+            if(val == mx && flag){
+                flag = false;
+                continue;
+            } 
+            if(val == mx)
+                ans -=val-1;
+            else
+                ans -=val;
+        }
+        return ans <= tasks.size() ? tasks.size() : ans;
+    }
+};
 ```
