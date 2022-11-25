@@ -531,3 +531,30 @@ public:
     }
 };
 ```
+### 56. Merge Intervals
+Problem Link: https://leetcode.com/problems/merge-intervals/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector<vector<int>> ans;
+        sort(intervals.begin(),intervals.end());
+        for(int i = 0;i < intervals.size();i++){
+            int first = intervals[i][0];
+            int second = intervals[i][1];
+            while(i<intervals.size()){
+                if(i+1 < intervals.size() and second>=intervals[i+1][0]){
+                    second = max(second,intervals[i+1][1]);
+                }else{
+                    break;
+                }
+                i++;
+            }
+            ans.push_back({first,second});
+        }
+        return ans;
+    }
+};
+```
