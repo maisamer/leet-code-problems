@@ -411,3 +411,64 @@ public:
     }
 };
 ```
+### 378. Kth Smallest Element in a Sorted Matrix
+Problem Link: https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    vector<int> heap;
+    int left(int node){
+        int left = 2*node + 1;
+        return left > size() ? -1 : left;
+    }
+    int right(int node){
+        int right = 2*node + 2;
+        return right > size() ? -1 : right;
+    }
+    int parent(int node){ return node == 0 ? -1 : (node - 1)/2; }
+    void reheapUp(int pos){
+        if(pos == 0 or heap[parent(pos)] > heap[pos])
+            return;
+        swap(heap[pos],heap[parent(pos)]);
+        reheapUp(parent(pos));
+    }
+    void reheapDown(int pos){
+        int selchild = left(pos);
+        if(selchild == -1) return;
+        int rightPos = right(pos);
+        if(rightPos != -1 && heap[selchild]<heap[rightPos])
+            selchild = rightPos;
+        if(heap[pos] < heap[selchild]){
+            swap(heap[pos],heap[selchild]);
+            reheapDown(selchild);
+        }
+    }
+    int top(){ return heap.front(); }
+    void push(int node){
+        heap.push_back(node);
+        reheapUp(size()-1);
+    }
+    void pop(){
+        if(size()){
+            heap[0] = heap.back();
+            heap.pop_back();
+            reheapDown(0);
+        }
+    }
+    int size(){return heap.size();}
+
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int n = matrix.size();
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                push(matrix[i][j]);
+                if(size()>k)
+                    pop();
+            }
+        }
+        return top();
+    }
+};
+```
