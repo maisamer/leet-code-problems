@@ -633,3 +633,30 @@ public:
     }
 };
 ```
+### 452. Minimum Number of Arrows to Burst Balloons
+Problem Link: https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int findMinArrowShots(vector<vector<int>>& points) {
+        sort(points.begin(),points.end(),[](auto &left, auto &right) {
+             return left[1] < right[1];
+        });
+        int ans = 1;
+        int prev = points[0][1];
+        for(int i=0;i<points.size();i++){
+            cout<< points[i][0] << points[i][1] <<endl;
+        }
+        for(int i=1;i<points.size();i++){
+            if(prev <= points[i][1] and prev >= points[i][0]){
+                continue;
+            }
+            ans ++;
+            prev = points[i][1];
+        }
+        return ans;
+    }
+};
+```
