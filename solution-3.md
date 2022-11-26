@@ -660,3 +660,45 @@ public:
     }
 };
 ```
+### 57. Insert Interval
+Problem Link: https://leetcode.com/problems/insert-interval/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        vector<vector<int>> ans;
+        int index = -1;
+        for(int i=0;i<intervals.size();i++){
+            if(intervals[i][0]<=newInterval[0]&&intervals[i][1]>=newInterval[0]
+                or intervals[i][0]<=newInterval[1]&&intervals[i][1]>=newInterval[1]){
+                intervals[i][0] = min(intervals[i][0],newInterval[0]);
+                intervals[i][1] = max(intervals[i][1],newInterval[1]); 
+                index = i;
+                break;
+            }else if(intervals[i][0]>newInterval[0]){
+                intervals.insert(intervals.begin()+i,newInterval);
+                index = i;
+                break;
+            }
+        }
+        if(index == -1){
+            intervals.push_back(newInterval);
+            return intervals;
+        }
+        int prev = intervals[0][1];
+        for(int i=0;i<intervals.size();i++){
+            int a = intervals[i][0];
+            int b = intervals[i][1];
+            while(i+1<intervals.size() && b>=intervals[i+1][0]){
+                b = max(intervals[i+1][1],b); 
+                i++;
+            }
+            prev = b;
+            ans.push_back({a,b});
+        }
+        return ans;
+    }
+};
+```
