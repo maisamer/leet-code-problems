@@ -837,8 +837,8 @@ public:
 ### 658. Find K Closest Elements
 Problem Link: https://leetcode.com/problems/find-k-closest-elements/
 
-#### - CPP Solution
-```cpp
+#### - java Solution
+```java
 class Solution {
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
         int l=0,r=arr.length-k;
