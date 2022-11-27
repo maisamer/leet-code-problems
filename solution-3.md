@@ -834,6 +834,41 @@ public:
     }
 };
 ```
+### 658. Find K Closest Elements
+Problem Link: https://leetcode.com/problems/find-k-closest-elements/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int l=0,r=arr.length-k;
+        List<Integer> ans = new ArrayList();
+        while(l<r){
+            int mid = (l+r)/2;
+            if(arr[mid]-x<x-arr[mid+k]) l = mid+1;
+            else r = mid;
+        }
+        for(int i=l;i<l+k;i++){
+            ans.add(arr[i]);
+        }
+        return ans;
+    }
+}
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
 ### 
 Problem Link: 
 
