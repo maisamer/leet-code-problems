@@ -876,12 +876,34 @@ class Solution {
     }
 }
 ```
-### 
-Problem Link: 
+### 904. Fruit Into Baskets
+Problem Link: https://leetcode.com/problems/fruit-into-baskets/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+    public int totalFruit(int[] fruits) {
+        int l=0,key1=-1,key2=-1,count1=0,count2=0,res=0;
+        for(int r=0;r<fruits.length;r++){
+            if(fruits[r] != key1 && fruits[r] != key2){
+                while(count1>0 && count2>0){
+                    if(fruits[l]==key1) {count1--; if(count1 == 0) key1=-1;}
+                    else {count2--; if(count2 == 0)key2=-1;}
+                    l++;
+                }
+            }
+            if(key1 == -1 || fruits[r] == key1){
+                count1++;
+                key1=fruits[r];
+            }else if(key2 == -1 || fruits[r] == key2){
+                count2++;
+                key2=fruits[r];
+            }
+            res=Math.max(res,count1+count2);
+        }
+        return res;
+    }
+}
 ```
 ### 
 Problem Link: 
