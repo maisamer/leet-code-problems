@@ -879,8 +879,8 @@ class Solution {
 ### 904. Fruit Into Baskets
 Problem Link: https://leetcode.com/problems/fruit-into-baskets/
 
-#### - CPP Solution
-```cpp
+#### - java Solution
+```java
 class Solution {
     public int totalFruit(int[] fruits) {
         int l=0,key1=-1,key2=-1,count1=0,count2=0,res=0;
