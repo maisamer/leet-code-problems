@@ -1001,6 +1001,66 @@ public:
     }
 };
 ```
+### 230. Kth Smallest Element in a BST
+Problem Link: https://leetcode.com/problems/kth-smallest-element-in-a-bst
+
+#### - CPP Solution using Inorder traverse
+```cpp
+class Solution {
+    vector<int> v;
+    void inOrder(TreeNode* root) {
+        if(root == nullptr)
+            return;
+        inOrder(root->left);
+        v.push_back(root->val);
+        inOrder(root->right);   
+    }
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        inOrder(root);
+        return v[k-1];
+    }
+};
+```
+#### - CPP Solution using Stack
+```cpp
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode*> s;
+        TreeNode* curr = root;
+        while(!s.empty() or curr != nullptr){
+            // go left first
+            while(curr != nullptr){
+                s.push(curr);
+                curr = curr->left;
+            }
+            curr = s.top();
+            s.pop();
+            k --;
+            if(!k)
+                return curr->val;
+            curr = curr->right;
+        }
+        return -1;
+
+    }
+};
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
 ### 
 Problem Link: 
 
