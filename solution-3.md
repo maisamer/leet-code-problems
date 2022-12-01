@@ -952,3 +952,43 @@ public:
     }
 };
 ```
+### 424. Longest Repeating Character Replacement
+Problem Link: https://leetcode.com/problems/longest-repeating-character-replacement/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int characterReplacement(string s, int k) {
+        int l = 0,res=0,rem=0,mxfreq=0;
+        map<char,int> m;
+        for(int r=0;r<s.size();r++){
+            m[s[r]]++;
+            mxfreq = max(mxfreq,m[s[r]]);
+            rem = k-(r-l+1-mxfreq);
+            while(rem < 0){
+                m[s[l]]--;
+                l++;
+                rem = r-l+1-mxfreq;
+            }
+            res=max(res,r-l+1);
+        }
+        return res;
+    }
+};
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
