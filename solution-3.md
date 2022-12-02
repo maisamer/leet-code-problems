@@ -1091,12 +1091,52 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 347. Top K Frequent Elements
+Problem Link: https://leetcode.com/problems/top-k-frequent-elements
 
-#### - CPP Solution
+#### - CPP Solution using max heap
 ```cpp
-
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        map<int,int>m;
+        priority_queue<pair<int,int>> q;
+        vector<int> ans;
+        for(int i=0;i<nums.size();i++)
+            m[nums[i]]++;
+        for (auto const& [key, val] : m)
+            q.push({val,key});
+        while(k--){
+            ans.push_back(q.top().second);
+            q.pop();
+        }
+        return ans;
+    }
+};
+```
+#### - CPP Solution using buket sort
+```cpp
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        map<int,int>m;
+        vector<vector<int>> freq(nums.size()+1);
+        vector<int> ans;
+        for(int i=0;i<nums.size();i++)
+            m[nums[i]]++;
+        for (auto const& [key, val] : m)
+            freq[val].push_back(key);
+        for(int i=nums.size();i>=0;i--){
+            for(int j=0;j<freq[i].size();j++){
+                ans.push_back(freq[i][j]);
+                k--;
+                if(!k)
+                    return ans;
+            }
+        }
+        return ans;
+    }
+};
 ```
 ### 
 Problem Link: 
