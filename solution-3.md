@@ -1138,10 +1138,34 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 451. Sort Characters By Frequency
+Problem Link: https://leetcode.com/problems/sort-characters-by-frequency/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    string frequencySort(string s) {
+        string ans = "";
+        vector<pair<int,char>> freq(123,{0,'_'});
+        for(int i=0;i<s.size();i++){
+            int index = (int)s[i];
+            freq[index].first+=1;
+            freq[index].second = s[i];
+        }
+        sort(freq.begin(),freq.end());
+        int sz = 0;
+        for(int i=freq.size()-1;i>=0;i--){
+            char c = freq[i].second;
+            int cnt = freq[i].first;
+            while(cnt--){
+                sz++;
+                ans+=c;
+            }
+            if(sz == s.size())
+                break;
+        }
+        return ans;
+    }
+};
 ```
