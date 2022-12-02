@@ -1047,12 +1047,49 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 973. K Closest Points to Origin
+Problem Link: https://leetcode.com/problems/k-closest-points-to-origin
 
-#### - CPP Solution
+#### - CPP Solution using sort approach
 ```cpp
-
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        sort(points.begin(),points.end(), [](vector<int> const& a, vector<int> const& b)
+        {
+             return a[0]*a[0]+a[1]*a[1] < b[0]*b[0]+b[1]*b[1];
+        });
+        vector<vector<int>> newVec(points.begin(), points.begin()+k);
+        return newVec;
+    }
+};
+```
+#### - CPP Solution using min heap approach
+```cpp
+struct myComp {
+    constexpr bool operator()(
+        vector<int> const& a,
+        vector<int> const& b)
+        const noexcept
+    {
+        return a[0]*a[0]+a[1]*a[1] > b[0]*b[0]+b[1]*b[1];
+    }
+ };
+class Solution {
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int k) {
+        priority_queue<vector<int>,vector<vector<int>>,myComp> q;
+        vector<vector<int>> ans;
+        for(int i=0;i<points.size();i++){
+            q.push(points[i]);
+        }
+        while(k--){
+            ans.push_back(q.top());
+            q.pop();
+        }
+        return ans;
+    }
+};
 ```
 ### 
 Problem Link: 
