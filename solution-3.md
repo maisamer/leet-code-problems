@@ -1212,3 +1212,75 @@ public:
     }
 };
 ```
+### 767. Reorganize String
+Problem Link: https://leetcode.com/problems/reorganize-string/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    string reorganizeString(string s) {
+        map<char,int> m;
+        int mxFreq = 0;
+        char c ;
+        for(int i=0;i<s.size();i++){
+            m[s[i]]++;
+            mxFreq = max(mxFreq,m[s[i]]);
+            if(m[s[i]]==mxFreq)
+                c = s[i];
+        }
+        int i = 0;
+        string ans = "";
+        if(mxFreq-1 > s.size()-mxFreq)
+            return ans;
+        while(i<s.size()){
+            ans+=c;
+            i++;
+            mxFreq--;
+            for(auto const&[key,val] : m){
+                if(mxFreq>0 and mxFreq-1 >= s.size()-i-mxFreq)
+                    break;
+                if(key != c and val){
+                    ans += key;
+                    m[key]--;
+                    i++;
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+class Solution {
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+class Solution {
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+class Solution {
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+class Solution {
+
+```
