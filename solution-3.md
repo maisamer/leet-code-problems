@@ -1288,12 +1288,46 @@ public:
 };
 
 ```
-### 
-Problem Link: 
+### 210. Course Schedule II
+Problem Link: https://leetcode.com/problems/course-schedule-ii
 
 #### - CPP Solution
 ```cpp
+class Solution {
+    bool vis[2002];
+    vector<int> adj[2003];
+    vector<int> ans;
+    set<int> exist;
+    bool isCycle(int node,int numCourses){
+        if(vis[node])
+            return true;
 
+        if(exist.find(node) != exist.end())
+            return false;
+        
+        vis[node] = true;
+        for(int i=0;i<adj[node].size();i++){
+            if(isCycle(adj[node][i],numCourses))
+                return true;
+        }
+        ans.push_back(node);
+        exist.insert(node);
+        vis[node] = false;
+        return false;
+    }
+public:
+    vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
+        for(int i=0;i<prerequisites.size();i++){
+            adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
+        }
+        for(int i=0;i<numCourses;i++){
+            if(isCycle(i,numCourses)){
+                return {};
+            }
+        }
+        return ans;
+    }
+};
 ```
 ### 
 Problem Link: 
