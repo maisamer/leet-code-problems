@@ -1169,3 +1169,22 @@ public:
     }
 };
 ```
+### 215. Kth Largest Element in an Array
+Problem Link: https://leetcode.com/problems/kth-largest-element-in-an-array
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int ans = 0;
+        make_heap(nums.begin(), nums.end());
+        while(k--){
+            ans = nums.front();
+            pop_heap(nums.begin(), nums.end());
+            nums.pop_back();
+        }
+        return ans;
+    }
+};
+```
