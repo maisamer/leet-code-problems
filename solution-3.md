@@ -1329,12 +1329,46 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 310. Minimum Height Trees
+Problem Link: https://leetcode.com/problems/minimum-height-trees/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
+        vector<int> leaves;
+        if(n <= 2){
+            for(int i=0;i<n;i++)
+                leaves.push_back(i);
+        }else{
+            vector<int> adj[20000+2];
+            vector<int> degree(n, 0);
+            for(int i=0;i<edges.size();i++){
+                adj[edges[i][0]].push_back(edges[i][1]);
+                adj[edges[i][1]].push_back(edges[i][0]);
+                degree[edges[i][0]]++;
+                degree[edges[i][1]]++;
+            }
+            for(int i=0;i<n;i++)
+                if(degree[i]==1)
+                    leaves.push_back(i);
+            while(n > 2){
+                n-=leaves.size();
+                vector<int> temp;
+                for(auto leaf : leaves){
+                    for(auto node : adj[leaf]){
+                        degree[node]--;
+                        if(degree[node]==1)
+                            temp.push_back(node);
+                    }
+                }
+                leaves = temp;
+            }
+        }
+        return leaves;
+    }
+};
 ```
 ### 
 Problem Link: 
