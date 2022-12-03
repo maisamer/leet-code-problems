@@ -1427,19 +1427,77 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 103. Binary Tree Zigzag Level Order Traversal
+Problem Link: https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
 
-#### - CPP Solution
+#### - CPP Solution using stack
 ```cpp
+class Solution {
+public:
+vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+    std::stack<TreeNode*>s1,s2 ;
+    vector<vector<int>>ans;
+    if(root != NULL) s1.push(root);
+    int sz =0;
+    vector<int> v;
+    while(!s1.empty()||!s2.empty()){
+        while(!s1.empty()){
+            TreeNode* curr = s1.top();
+            s1.pop();
+            v.push_back(curr->val);
+            if(curr->left != nullptr) s2.push(curr->left);
+            if(curr->right != nullptr) s2.push(curr->right);
+            if(s1.empty()){
+                ans.push_back(v);
+                v.clear();
+            }
+        }
+        while(!s2.empty()){
+            TreeNode* curr = s2.top();
+            s2.pop();
+            v.push_back(curr->val);
+            if(curr->right != nullptr) s1.push(curr->right);
+            if(curr->left != nullptr) s1.push(curr->left);
+            if(s2.empty()){
+                ans.push_back(v);
+                v.clear();
+            }
+        }
+    }
+    return ans;
+}
+};
 
 ```
-### 
-Problem Link: 
 
-#### - CPP Solution
+#### - CPP Solution using bfs
 ```cpp
-
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        if(root == nullptr) return {};
+        vector<vector<int>> ans;
+        queue<TreeNode*> q;
+        q.push(root);
+        bool flag = false;
+        while(!q.empty()){
+            int sz = q.size();
+            vector<int> level;
+            while(sz --){
+                TreeNode* curr = q.front();
+                q.pop();
+                level.push_back(curr->val);
+                if(curr->left != nullptr)   q.push(curr->left);
+                if(curr->right != nullptr)   q.push(curr->right);
+            }
+            if(flag)
+                reverse(level.begin(),level.end());
+            flag = !flag;
+            ans.push_back(level);
+        }
+        return ans;
+    }
+};
 ```
 ### 
 Problem Link: 
