@@ -1552,10 +1552,34 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 199. Binary Tree Right Side View
+Problem Link: https://leetcode.com/problems/binary-tree-right-side-view
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    vector<int> rightSideView(TreeNode* root) {
+        if(root == nullptr) return {};
+        vector<int> level;
+        queue<TreeNode*> q;
+        q.push(root);
+        bool flag = true;
+        while(!q.empty()){
+            int sz = q.size();
+            while(sz --){
+                TreeNode* curr = q.front();
+                q.pop();
+                if(flag){
+                    level.push_back(curr->val);
+                    flag = false;
+                }
+                if(curr->right != nullptr)   q.push(curr->right);
+                if(curr->left != nullptr)   q.push(curr->left);
+            }
+            flag = true;
+        }
+        return level;
+    }
+};
 ```
