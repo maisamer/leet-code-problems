@@ -1525,12 +1525,32 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 116. Populating Next Right Pointers in Each Node
+Problem Link: https://leetcode.com/problems/populating-next-right-pointers-in-each-node
 
 #### - CPP Solution
 ```cpp
+class Solution {
+public:
+    Node* connect(Node* root) {
+        Node* curr = root;
+        Node* nxt = nullptr;
+        if(curr != nullptr)
+            nxt = curr->left;
+        while(curr != nullptr and nxt != nullptr){
+            curr->left->next = curr->right;
+            if(curr->next != nullptr)
+                curr->right->next = curr->next->left;
+            curr = curr->next;
+            if(curr == nullptr){
+                curr = nxt;
+                nxt = curr->left;
+            }
 
+        }
+        return root;
+    }
+};
 ```
 ### 
 Problem Link: 
