@@ -1633,3 +1633,29 @@ public:
     }
 };
 ```
+### 113. Path Sum II
+Problem Link: https://leetcode.com/problems/path-sum-ii/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    vector<vector<int>> ans;
+    void dfs(TreeNode* node,int targetSum,int sum,vector<int> path){
+        if(node == nullptr)
+            return;
+        sum += node->val;
+        path.push_back(node->val);
+        if(sum == targetSum && node->left == nullptr && node->right == nullptr){
+            ans.push_back(path);
+            return;
+        }
+        dfs(node->left,targetSum,sum,path);
+        dfs(node->right,targetSum,sum,path);
+    }
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+        dfs(root,targetSum,0,{});
+        return ans;
+    }
+};
+```
