@@ -1583,3 +1583,53 @@ public:
     }
 };
 ```
+### 863. All Nodes Distance K in Binary Tree
+Problem Link: https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    void buildGraph(vector<vector<int>>& adj,TreeNode* node){
+        if(node == nullptr)
+            return ;
+        if(node->left != nullptr){
+            adj[node->val].push_back(node->left->val);
+            adj[node->left->val].push_back(node->val);
+        }
+        if(node->right != nullptr){
+            adj[node->val].push_back(node->right->val);
+            adj[node->right->val].push_back(node->val);
+        }
+        buildGraph(adj,node->left);
+        buildGraph(adj,node->right);
+    }
+public:
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        vector<vector<int>> adj(510);
+        vector<bool> vis(505,false);
+        buildGraph(adj,root);
+        queue<int>q;
+        q.push(target->val);
+        vector<int> ans;
+        while(!q.empty() and k){
+            int sz = q.size();
+            while(sz--){
+                int curr = q.front();
+                q.pop();
+                vis[curr] = true;
+                for(int i=0;i<adj[curr].size();i++){
+                    if(!vis[adj[curr][i]]){
+                        q.push(adj[curr][i]);
+                    }
+                }
+            }
+            k--;
+        }
+        while(!q.empty()){
+            ans.push_back(q.front());
+            q.pop();
+        }
+        return ans;
+    }
+};
+```
