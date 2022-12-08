@@ -1710,10 +1710,26 @@ class Solution {
     }
 }
 ```
-### 
-Problem Link:
+### 654. Maximum Binary Tree
+Problem Link: https://leetcode.com/problems/maximum-binary-tree/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+    private TreeNode buildTree(int[] nums,int l,int r){
+        if(r-l+1<=0)
+            return null;
+        int mxInd = l;
+        for(int i=l+1;i<=r;i++)
+            if(nums[mxInd]<nums[i])
+                mxInd = i;
+        TreeNode root = new TreeNode(nums[mxInd]);
+        root.left = buildTree(nums,l,mxInd-1);
+        root.right = buildTree(nums,mxInd+1,r);
+        return root;
+    }
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return buildTree(nums,0,nums.length-1);
+    }
+}
 ```
