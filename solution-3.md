@@ -1659,3 +1659,48 @@ public:
     }
 };
 ```
+### 437. Path Sum III
+Problem Link: https://leetcode.com/problems/path-sum-iii/
+
+#### - JAVA Solution
+```java
+class Solution {
+    Map<Long,Integer> freq;
+    int dfs(TreeNode node,Long prevSum,int targetSum){
+        if(node == null)
+            return 0;
+        Long currentSum = prevSum + node.val;
+        Long x = currentSum - targetSum;
+        int sol = 0;
+        if(freq.containsKey(x)){
+            sol = freq.get(x);
+        }
+        if(freq.containsKey(currentSum))
+            freq.put(currentSum,1+freq.get(currentSum));
+        else
+            freq.put(currentSum,1);
+        int ans = sol + dfs(node.left,currentSum,targetSum) + dfs(node.right,currentSum,targetSum);
+        freq.put(currentSum,freq.get(currentSum)-1);
+        return ans;
+    }
+    public int pathSum(TreeNode root, int targetSum) {
+        freq = new HashMap<>();
+        freq.put(0L,1);
+        return dfs(root,0L,targetSum);
+    }
+}
+```
+### 
+Problem Link:
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link:
+
+#### - CPP Solution
+```cpp
+
+```
