@@ -1733,3 +1733,35 @@ class Solution {
     }
 }
 ```
+### 662. Maximum Width of Binary Tree
+Problem Link: https://leetcode.com/problems/maximum-width-of-binary-tree/
+
+#### - CPP Solution
+```cpp
+
+class Solution {
+public:
+    int widthOfBinaryTree(TreeNode* root) {
+       queue<pair<TreeNode*,long long>> q;
+       int res = 1;
+       q.push({root,0});
+       while(!q.empty()){
+           int sz = q.size();
+           int ptr = q.front().second;
+           while(sz--){
+               auto [curr,width] = q.front();
+               if(curr->left)
+                    q.push({curr->left,width*2-2*ptr});
+                if(curr->right)
+                    q.push({curr->right,width*2+1-2*ptr});
+               q.pop();
+           }
+           if(!q.empty()){
+               int level_width = q.back().second - q.front().second + 1;
+               res = max(res,level_width);
+           }
+       }
+       return res; 
+    }
+};
+```
