@@ -1787,3 +1787,23 @@ public:
     }
 };
 ```
+### 98. Validate Binary Search Tree
+Problem Link: https://leetcode.com/problems/validate-binary-search-tree/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+
+    bool isValidBST(TreeNode* root,long left,long right) {
+        if(root == nullptr)
+            return true;
+        if(root->val > right or root->val < left)
+            return false;
+        return isValidBST(root->left,left,root->val-1LL) and isValidBST(root->right,root->val+1LL,right);
+    }
+    bool isValidBST(TreeNode* root) {
+        return isValidBST(root,-long(1LL<<31), long(1LL<<31));
+    }
+};
+```
