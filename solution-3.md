@@ -1807,3 +1807,54 @@ public:
     }
 };
 ```
+### 208. Implement Trie (Prefix Tree)
+Problem Link: https://leetcode.com/problems/implement-trie-prefix-tree
+
+#### - CPP Solution
+```cpp
+class TrieNode{
+public:
+    map<char,TrieNode*> children;
+    bool endOfWords;
+    TrieNode(){
+        endOfWords = false;
+    }
+};
+class Trie {
+public:
+    TrieNode* root;
+    Trie() {
+        root = new TrieNode();
+    }
+    
+    void insert(string word) {
+        TrieNode* curr = root;
+        for(auto c : word){
+            if(curr->children[c]==NULL)
+                curr->children[c] = new TrieNode();
+            curr = curr->children[c];
+        }
+        curr->endOfWords = true;
+    }
+    
+    bool search(string word) {
+        TrieNode* curr = root;
+        for(auto c : word){
+            if(curr->children[c] == NULL)
+                return false;
+            curr = curr->children[c];
+        }   
+        return curr->endOfWords;
+    }
+    
+    bool startsWith(string prefix) {
+        TrieNode* curr = root;
+        for(auto c : prefix){
+            if(curr->children[c] == NULL)
+                return false;
+            curr = curr->children[c];
+        }
+        return true;
+    }
+};
+```
