@@ -1765,3 +1765,25 @@ public:
     }
 };
 ```
+### 105. Construct Binary Tree from Preorder and Inorder Traversal
+Problem Link: https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        if(!preorder.size() or !inorder.size())
+            return nullptr;
+        TreeNode* root = new TreeNode(preorder[0]);
+        int mid = find(inorder.begin(),inorder.end(), preorder[0]) - inorder.begin();
+        vector<int> left_inorder(inorder.begin(), inorder.begin()+mid);
+        vector<int> right_inorder(inorder.begin()+mid+1, inorder.end());
+        vector<int> left_preorder(preorder.begin()+1, preorder.begin()+mid+1);
+        vector<int> right_preorder(preorder.begin()+mid+1, preorder.end());
+        root->left = buildTree(left_preorder,left_inorder);
+        root->right = buildTree(right_preorder,right_inorder);
+        return root;
+    }
+};
+```
