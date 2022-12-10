@@ -1986,12 +1986,31 @@ public:
     }
 };
 ```
-### 
-Problem Link:
+### 11. Container With Most Water
+Problem Link: https://leetcode.com/problems/container-with-most-water/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int l=0,r=height.size()-1,res=0;
+        while(l<r){
+            res = max(res,min(height[l],height[r]) * (r-l));
+            if(height[l]<height[r])
+                l++;
+            else if(height[l]>height[r])
+                r--;
+            else{
+                if(l+1 < r and r-1>l and height[l+1]>height[r-1])
+                    l++;
+                else
+                    r--;
+            }
+        }
+        return res;
+    }
+};
 ```
 ### 
 Problem Link:
