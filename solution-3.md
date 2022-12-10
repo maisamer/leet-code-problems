@@ -1950,7 +1950,7 @@ public:
 ### 75. Sort Colors
 Problem Link: https://leetcode.com/problems/sort-colors/
 
-#### - CPP Solution
+#### - CPP Solution using bucket sort algorithm
 ```cpp
 class Solution {
 public:
@@ -1962,6 +1962,27 @@ public:
         for(int i=0;i<3;i++)
             for(int j=0;j<count[i];j++)
                 nums[l++] = i;
+    }
+};
+```
+
+#### - CPP Solution using two pointer approach
+```cpp
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int l = 0,r=nums.size()-1,i=0;
+        while(i<=r){
+            if(nums[i] == 0){
+                swap(nums[i],nums[l]);
+                l++;
+            }else if(nums[i] == 2){
+                swap(nums[i],nums[r]);
+                r--;
+                i--;
+            }
+            i++;
+        }
     }
 };
 ```
