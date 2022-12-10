@@ -1947,12 +1947,23 @@ public:
     }
 };
 ```
-### 
-Problem Link:
+### 75. Sort Colors
+Problem Link: https://leetcode.com/problems/sort-colors/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int count[3]={0,0,0};
+        for(int i = 0;i < nums.size();i++)
+            count[nums[i]]++;
+        int l = 0;
+        for(int i=0;i<3;i++)
+            for(int j=0;j<count[i];j++)
+                nums[l++] = i;
+    }
+};
 ```
 ### 
 Problem Link:
