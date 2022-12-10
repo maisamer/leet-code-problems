@@ -1889,12 +1889,39 @@ public:
     }
 };
 ```
-### 
-Problem Link:
+### 16. 3Sum Closest
+Problem Link: https://leetcode.com/problems/3sum-closest/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        int res = INT_MAX;
+        int cloestSum = 0;
+        sort(nums.begin(),nums.end());
+        for(int i=0;i<nums.size();i++){
+            if(i>0 and nums[i]==nums[i-1])
+                continue;
+            int l=i+1,r=nums.size()-1;
+            while(l < r){
+                int sum = nums[i] + nums[l] + nums[r];
+                int diff = sum-target;
+                if(diff == 0)
+                    return sum;
+                if(abs(diff) < res){
+                    res = abs(diff);
+                    cloestSum = sum;
+                }
+                if(sum > target)
+                    r--;
+                else
+                    l++;
+            }
+        }  
+        return cloestSum;
+    }
+};
 ```
 ### 
 Problem Link:
