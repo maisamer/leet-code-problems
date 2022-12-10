@@ -1923,19 +1923,29 @@ public:
     }
 };
 ```
-### 
-Problem Link:
+### 713. Subarray Product Less Than K
+Problem Link: https://leetcode.com/problems/subarray-product-less-than-k/
 
 #### - CPP Solution
 ```cpp
-
-```
-### 
-Problem Link:
-
-#### - CPP Solution
-```cpp
-
+class Solution {
+public:
+    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+        if(k<=1)
+            return 0;
+        int ans = 0,l=0,r=0 , prod = 1;
+        while(r < nums.size()){
+            prod*=nums[r];
+            while(prod >= k){
+                prod/=nums[l];
+                l++;
+            }
+            ans+= r-l+1;
+            r++;
+        }
+        return ans;
+    }
+};
 ```
 ### 
 Problem Link:
