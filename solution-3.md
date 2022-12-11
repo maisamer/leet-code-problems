@@ -2012,12 +2012,62 @@ public:
     }
 };
 ```
-### 
-Problem Link:
+### 720. Longest Word in Dictionary
+Problem Link: https://leetcode.com/problems/longest-word-in-dictionary/description/
 
 #### - CPP Solution
 ```cpp
-
+class Trie{
+    class TrieNode{
+    public :
+        map<char,TrieNode*> children;
+        bool endWord;
+        TrieNode(){
+            endWord = false;
+        }
+    };
+    TrieNode* root;
+public:
+    Trie(){
+        root = new TrieNode();
+    }
+    void insert(string word){
+        TrieNode* curr = root;
+        for(auto c:word){
+            if(curr->children[c] == NULL)
+                curr->children[c] = new TrieNode();
+            curr = curr->children[c];
+        }
+        curr->endWord = true;
+    }
+    bool checkWord(string word){
+        TrieNode* curr = root;
+        for(auto c: word){
+            if(curr->children[c] == NULL)
+                return false;
+            curr = curr->children[c];
+            if(!curr->endWord)
+                return false;
+        }
+        return true;
+    }
+};
+class Solution {
+public:
+    string longestWord(vector<string>& words) {
+        string ans="";
+        Trie trie;
+        for(auto w : words)
+            trie.insert(w);
+        for(auto w : words){
+            if (size(w) < size(ans) or size(w) == size(ans) and w >= ans)
+                continue;
+            if(trie.checkWord(w))
+                    ans = w;
+        }
+        return ans;
+    }
+};
 ```
 ### 
 Problem Link:
