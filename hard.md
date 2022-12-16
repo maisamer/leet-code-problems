@@ -1,4 +1,4 @@
-## hard problem
+## Hard problem
 
 ### 41. First Missing Positive
 Problem Link: https://leetcode.com/problems/first-missing-positive/
