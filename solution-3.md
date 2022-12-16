@@ -2069,10 +2069,28 @@ public:
     }
 };
 ```
-### 
-Problem Link:
+### 421. Maximum XOR of Two Numbers in an Array
+Problem Link: https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    int findMaximumXOR(vector<int>& nums) {
+        int mask=0,ans=0;
+        for(int i=31;i>=0;i--){
+            set<int> found;
+            mask = mask | 1<<i;
+            for(auto num : nums)
+                found.insert(num & mask);
+            int temp = ans | 1<<i;
+            for (auto& f : found){
+                if(found.find(f^temp) != found.end()){
+                    ans = temp;
+                } 
+            }
+        }
+        return ans;
+    }
+};
 ```
