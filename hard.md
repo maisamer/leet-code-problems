@@ -78,3 +78,74 @@ public:
     }
 };
 ```
+### 51. N-Queens
+Problem Link: https://leetcode.com/problems/n-queens/
+
+#### - CPP Solution
+```cpp
+class Solution {
+    vector<vector<string>> ans;
+    bool vaild(vector<string> grid,int n,int r,int c){
+        for(int t=0;t<n;t++)
+            if(grid[r][t] == 'Q')
+                return false;
+        for(int i=r,j=c;i<n&&j<n;i++,j++)
+            if(grid[i][j] == 'Q')
+                return false;
+        for(int i=r,j=c;i>=0&&j>=0;i--,j--)
+            if(grid[i][j] == 'Q')
+                return false;
+        for(int i=r,j=c;i>=0&&j<n;i--,j++)
+            if(grid[i][j] == 'Q')
+                return false;
+        return true;
+    }
+    void backtrack(vector<string> grid,int n,int row){
+        if(row == n){
+            ans.push_back(grid);
+        }else{
+           for(int col=0;col<n;col++){
+                if(vaild(grid,n,row,col)){
+                    grid[row][col] = 'Q';
+                    backtrack(grid,n,row+1);
+                }   
+                grid[row][col] = '.';
+           }
+        }
+    }
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<string> grid;
+        for(int i=0;i<n;i++){
+            string init = "";
+            for(int j=0;j<n;j++){
+                init+='.';
+            }
+            grid.push_back(init);
+        }
+        backtrack(grid,n,0);
+        return ans;
+    }
+};
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
