@@ -128,12 +128,41 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 25. Reverse Nodes in k-Group
+Problem Link: https://leetcode.com/problems/reverse-nodes-in-k-group/
 
 #### - CPP Solution
 ```cpp
-
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+         ListNode *res = new ListNode(0, head);
+        ListNode* prevGroup = res;
+        while(1){
+            ListNode* end = getKthNode(prevGroup,k);
+            if(end == nullptr)
+                break;
+            ListNode* prev = end->next, *groupNext = end->next,*curr = prevGroup->next;
+            while(curr != groupNext){
+                ListNode* temp = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = temp;
+            }
+            ListNode* temp = prevGroup->next;
+            prevGroup->next = end;
+            prevGroup = temp;
+        }
+        return res->next;
+    }
+    ListNode* getKthNode(ListNode* start,int k){
+        while(k > 0 and start != nullptr){
+            start = start->next;
+            k--;
+        }
+        return start;
+    }
+};
 ```
 ### 
 Problem Link: 
