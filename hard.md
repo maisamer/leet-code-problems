@@ -172,22 +172,34 @@ Problem Link: https://leetcode.com/problems/merge-k-sorted-lists/
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        ListNode* dummy = new ListNode();
-        priority_queue<int,vector<int>,greater<int>> q;
-        for(int i=0;i<lists.size();i++){
-            ListNode* curr = lists[i];
-            while(curr != nullptr){
-                q.push(curr->val);
-                curr = curr->next;
+        if(lists.size()==0) return nullptr;
+        while(lists.size()>1){
+            vector<ListNode*> temp;
+            for(int i=0;i<lists.size();i+=2){
+                ListNode* l2 = i+1 < lists.size() ? lists[i+1] : nullptr;
+                temp.push_back(mergeLists(lists[i],l2));
             }
+            lists = temp;
         }
+        return lists[0];
+    }
+    ListNode* mergeLists(ListNode* l1,ListNode* l2){
+        ListNode* dummy = new ListNode();
         ListNode* curr = dummy;
-        while(!q.empty()){
-            int val = q.top();
-            q.pop();
-            curr->next = new ListNode(val);
+        while(l1 != nullptr and l2 != nullptr){
+            if(l1->val < l2->val){
+                curr->next = l1;
+                l1 = l1->next;
+            }else{
+                curr->next = l2;
+                l2 = l2->next;
+            }
             curr = curr->next;
         }
+        if(l1 != nullptr)
+            curr->next = l1;
+        if(l2 != nullptr)
+            curr->next = l2;
         return dummy->next;
     }
 };
