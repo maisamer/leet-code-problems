@@ -164,6 +164,69 @@ public:
     }
 };
 ```
+### 23. Merge k Sorted Lists
+Problem Link: https://leetcode.com/problems/merge-k-sorted-lists/
+
+#### - CPP Solution
+```cpp
+class Solution {
+public:
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        ListNode* dummy = new ListNode();
+        priority_queue<int,vector<int>,greater<int>> q;
+        for(int i=0;i<lists.size();i++){
+            ListNode* curr = lists[i];
+            while(curr != nullptr){
+                q.push(curr->val);
+                curr = curr->next;
+            }
+        }
+        ListNode* curr = dummy;
+        while(!q.empty()){
+            int val = q.top();
+            q.pop();
+            curr->next = new ListNode(val);
+            curr = curr->next;
+        }
+        return dummy->next;
+    }
+};
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
+### 
+Problem Link: 
+
+#### - CPP Solution
+```cpp
+
+```
 ### 
 Problem Link: 
 
