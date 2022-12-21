@@ -204,12 +204,51 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 632. Smallest Range Covering Elements from K Lists
+Problem Link: https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
 
 #### - CPP Solution
 ```cpp
+class Item{
+public:
+    int num,i,j;
+    Item(int num,int i,int j){
+        this->num = num;
+        this->i = i;
+        this->j = j;
+    }
+};
+class Solution {
+public:
+    vector<int> smallestRange(vector<vector<int>>& nums) {
+       auto comp = [](const Item &x, const Item &y) {
+            return x.num > y.num;
+        };
+        priority_queue<Item, vector<Item>, decltype(comp)> min_heap(comp);
+        int mx = -1e6;
+        for(int i=0;i<nums.size();i++){
+            min_heap.push(Item(nums[i][0],i,0));
+            mx = max(mx,nums[i][0]);
+        }
+        Item it = min_heap.top();
+        min_heap.pop();
+        vector<int> ans {it.num,mx};
+        while(1){
+            if(it.j >= nums[it.i].size()-1)
+                break;
+            min_heap.push(Item(nums[it.i][it.j+1],it.i,it.j+1));
+            mx = max(mx,nums[it.i][it.j+1]);
+            it = min_heap.top();
+            min_heap.pop();
+            if(mx - it.num < ans[1] - ans[0]){
+                ans[0] = it.num;
+                ans[1] = mx;
+            }
 
+        }
+        return ans;
+    }
+};
 ```
 ### 
 Problem Link: 
