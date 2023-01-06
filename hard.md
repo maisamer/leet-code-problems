@@ -250,12 +250,31 @@ public:
     }
 };
 ```
-### 
-Problem Link: 
+### 239. Sliding Window Maximum
+Problem Link: https://leetcode.com/problems/sliding-window-maximum/
 
-#### - CPP Solution
+#### - JAVA Solution
 ```cpp
-
+class Solution {
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length - k +1;
+        int ans [] = new int[n];
+        Deque<Integer> dq = new ArrayDeque<>();
+        
+        for(int r=0,l=0;r<nums.length;r++){
+            while(dq.size() > 0 && nums[dq.getLast()] < nums[r])
+                dq.removeLast();
+            dq.addLast(r);
+            if(dq.size() > 0 && dq.getFirst()<l)
+                dq.removeFirst();
+            if(r+1 >= k){
+                ans[l] = nums[dq.getFirst()];
+                l++;
+            }
+        }
+        return ans;
+    }
+}
 ```
 ### 
 Problem Link: 
