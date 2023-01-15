@@ -87,7 +87,7 @@ class Solution {
     vector<vector<string>> ans;
     bool vaild(vector<string> grid,int n,int r,int c){
         for(int t=0;t<n;t++)
-            if(grid[r][t] == 'Q')
+            if(grid[r][t] == 'Q' or grid[t][c] == 'Q')
                 return false;
         for(int i=r,j=c;i<n&&j<n;i++,j++)
             if(grid[i][j] == 'Q')
