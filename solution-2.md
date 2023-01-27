@@ -51,7 +51,7 @@ public:
 };
 ```
 ### 852. Peak Index in a Mountain Array
-Problem Link: https://leetcode.com/problems/find-the-duplicate-number/
+Problem Link: https://leetcode.com/problems/peak-index-in-a-mountain-array/
 
 #### - CPP Solution
 ```cpp
