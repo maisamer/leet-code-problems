@@ -208,11 +208,6 @@ class LFUCache {
             return val;
         }
 
-        public void update(int val){
-            remove(val);
-            insertRight(val);
-        }
-
         public int length(){
             return cache.size();
         }
